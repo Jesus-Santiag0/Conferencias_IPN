@@ -8,6 +8,7 @@ import {
 import { Checkbox } from '../../components/ui/checkbox';
 import { Input } from '../../components/ui/input';
 import { Label } from '../../components/ui/label';
+import { Link } from 'react-router-dom';
 
 export const SignIn = (): JSX.Element => {
 	const [showPassword, setShowPassword] =
@@ -133,12 +134,12 @@ export const SignIn = (): JSX.Element => {
 				</Button>
 				<p className="font-['Nunito_Sans',Helvetica] font-normal text-[#7d8592] text-[13px] text-right">
 					¿Nuevo usuario?&nbsp;&nbsp;
-					<a
-						href="#"
-						className="font-['Nunito_Sans',Helvetica] font-normal text-[#016ccc] text-[13px] text-right margin-right: 40px"
+					<Link
+						to="/signup"
+						className="font-['Nunito_Sans',Helvetica] font-normal text-[#800040] text-[13px] text-right margin-right: 40px"
 					>
 						Regístrate ahora
-					</a>
+					</Link>
 				</p>
 			</div>
 		</div>
