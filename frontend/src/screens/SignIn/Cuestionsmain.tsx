@@ -5,8 +5,9 @@ import {
 	Card,
 	CardContent,
 } from '../../components/ui/card';
+import { Link } from 'react-router-dom';
 
-export const Cuestions = (): JSX.Element => {
+export const Cuestionsmain = (): JSX.Element => {
 	return (
 		<main className="flex flex-col min-h-screen items-center gap-52 px-4 py-0 bg-[#f2f2f3]">
 			<Card className="flex flex-col min-h-[165px] items-center gap-[22px] px-1 py-5 w-full mt-[-1px] bg-white border-0 shadow-none rounded-none">
@@ -68,12 +69,13 @@ export const Cuestions = (): JSX.Element => {
 						¿Quieres hacer una pregunta
 					</h2>
 				</div>
-
 				<Button
 					className="w-[52px] h-[52px] p-2.5 bg-[#800040] rounded-[50px] hover:bg-[#800040]/90"
 					size="icon"
 				>
-					<PlusIcon className="w-3.5 h-3.5" />
+					<Link to="/cuestions">
+						<PlusIcon className="w-3.5 h-3.5" />
+					</Link>
 				</Button>
 			</div>
 		</main>

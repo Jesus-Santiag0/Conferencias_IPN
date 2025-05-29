@@ -8,7 +8,8 @@ import {
 
 import { SignIn } from './screens/SignIn';
 import { SignUp } from './screens/SignIn/SignUp';
-import { Cuestions } from './screens/SignIn/Cuestionsmain';
+import { Cuestionsmain } from './screens/SignIn/Cuestionsmain';
+import { Cuestions } from './screens/SignIn/Cuestions';
 
 createRoot(
 	document.getElementById('app') as HTMLElement
@@ -20,6 +21,10 @@ createRoot(
 				<Route path="/signup" element={<SignUp />} />
 				<Route
 					path="/cuestionsmain"
+					element={<Cuestionsmain />}
+				/>
+				<Route
+					path="/cuestions"
 					element={<Cuestions />}
 				/>
 			</Routes>
