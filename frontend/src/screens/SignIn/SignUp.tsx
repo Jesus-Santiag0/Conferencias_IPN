@@ -4,10 +4,64 @@ import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
 import { Label } from '../../components/ui/label';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const SignUp = (): JSX.Element => {
 	const [showPassword, setShowPassword] =
 		useState(false);
+	const navigate = useNavigate();
+	// Para Registrar usuario
+	const [formData, setFormData] = useState({
+		nombre: '',
+		apellido: '',
+		email: '',
+		password: '',
+	});
+	const handleChange = (
+		e: React.ChangeEvent<HTMLInputElement>
+	) => {
+		setFormData({
+			...formData,
+			[e.target.name]: e.target.value,
+		});
+	};
+
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+
+		try {
+			const response = await fetch(
+				'http://localhost:3300/api/signup',
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(formData),
+				}
+			);
+
+			const result = await response.json();
+			if (result.success) {
+				// Redireccionar o limpiar formulario
+				setFormData({
+					nombre: '',
+					apellido: '',
+					email: '',
+					password: '',
+				});
+				navigate('/');
+				setTimeout(() => {
+					alert('Usuario registrado con éxito');
+				}, 100);
+			} else {
+				alert('Error al registrar: ' + result.error);
+			}
+		} catch (error) {
+			console.error('Error en la solicitud:', error);
+			alert('Error de conexión con el servidor');
+		}
+	};
 
 	return (
 		<div className="flex flex-col min-h-screen items-start bg-[#f2f2f3]">
@@ -34,7 +88,10 @@ export const SignUp = (): JSX.Element => {
 						Regístrate
 					</h2>
 
-					<div className="w-full space-y-6">
+					<form
+						onSubmit={handleSubmit}
+						className="w-full space-y-6"
+					>
 						<div className="space-y-2">
 							<Label
 								htmlFor="email"
@@ -45,6 +102,10 @@ export const SignUp = (): JSX.Element => {
 							<Input
 								id="email"
 								type="email"
+								name="email"
+								value={formData.email}
+								onChange={handleChange}
+								required
 								placeholder="ejemplo@ipn.mx"
 								className="h-[42px] bg-white rounded-[14px] border-[#d8e0ef] font-['Nunito_Sans',Helvetica]"
 							/>
@@ -60,6 +121,10 @@ export const SignUp = (): JSX.Element => {
 								</Label>
 								<Input
 									id="lastName"
+									name="apellido"
+									onChange={handleChange}
+									required
+									value={formData.apellido}
 									type="text"
 									className="h-[42px] bg-white rounded-[14px] border-[#d8e0ef]"
 								/>
@@ -75,6 +140,10 @@ export const SignUp = (): JSX.Element => {
 								<Input
 									id="firstName"
 									type="text"
+									value={formData.nombre}
+									name="nombre"
+									onChange={handleChange}
+									required
 									className="h-[42px] bg-white rounded-[14px] border-[#d8e0ef]"
 								/>
 							</div>
@@ -93,6 +162,10 @@ export const SignUp = (): JSX.Element => {
 									type={
 										showPassword ? 'text' : 'password'
 									}
+									name="password"
+									onChange={handleChange}
+									required
+									value={formData.password}
 									className="h-[42px] bg-white rounded-[14px] border-[#d8e0ef] pr-10"
 								/>
 								<Button
@@ -127,11 +200,14 @@ export const SignUp = (): JSX.Element => {
 								</Link>
 							</Button>
 
-							<Button className="h-12 px-[41px] py-3 bg-[#800040] rounded-[14px] font-['Nunito_Sans',Helvetica] font-bold text-white text-[14.8px]">
+							<Button
+								type="submit"
+								className="h-12 px-[41px] py-3 bg-[#800040] rounded-[14px] font-['Nunito_Sans',Helvetica] font-bold text-white text-[14.8px]"
+							>
 								Regístrate
 							</Button>
 						</div>
-					</div>
+					</form>
 				</div>
 			</main>
 		</div>

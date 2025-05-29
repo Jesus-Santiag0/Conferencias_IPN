@@ -9,17 +9,18 @@ import { Checkbox } from '../../components/ui/checkbox';
 import { Input } from '../../components/ui/input';
 import { Label } from '../../components/ui/label';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const SignIn = (): JSX.Element => {
 	const [showPassword, setShowPassword] =
 		useState(false);
+	const navigate = useNavigate();
 
 	// Para Iniciar Sesión
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const handleLogin = async (e: React.FormEvent) => {
 		e.preventDefault(); // evita recargar la página
-
 		try {
 			const response = await fetch(
 				'http://localhost:3300/api/login',
@@ -31,12 +32,14 @@ export const SignIn = (): JSX.Element => {
 					body: JSON.stringify({ email, password }),
 				}
 			);
-
 			const data = await response.json();
 			console.log(data);
 
 			if (response.ok) {
-				alert('Inicio de sesión exitoso');
+				navigate('/cuestionsmain');
+				setTimeout(() => {
+					alert('Inicio de sesión exitoso');
+				}, 100);
 			} else {
 				alert(data.message || 'Error al iniciar sesión');
 			}

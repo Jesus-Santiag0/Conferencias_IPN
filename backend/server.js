@@ -22,7 +22,7 @@ const db = mysql.createConnection({
 	database: 'Conferencias_IPN',
 });
 
-// Ruta de login
+// Ruta de API para Login.tsx
 app.post('/api/login', (req, res) => {
 	console.log('Cuerpo recibido', req.body);
 	const { email, password } = req.body;
@@ -51,6 +51,36 @@ app.post('/api/login', (req, res) => {
 	});
 });
 
+// Ruta para la API de signup.tsx
+app.post('/api/signup', (req, res) => {
+	const { nombre, apellido, email, password } = req.body;
+
+	const sql =
+		'INSERT INTO Usuarios (Nombre, Apellido, Correo, Contrasena) VALUES (?, ?, ?, ?)';
+	db.query(
+		sql,
+		[nombre, apellido, email, password],
+		(err, result) => {
+			if (err) {
+				console.error(
+					'❌ Error al insertar usuario:',
+					err
+				);
+				return res.status(500).json({
+					success: false,
+					error: 'Error en el servidor',
+				});
+			}
+
+			res.status(201).json({
+				success: true,
+				message: 'Usuario registrado correctamente',
+			});
+		}
+	);
+});
+
+// Comprueba si el servidor está corriendo
 app.listen(PORT, () => {
 	console.log(
 		`Servidor corriendo en http://localhost:${PORT}`
