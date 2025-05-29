@@ -13,6 +13,39 @@ import { Link } from 'react-router-dom';
 export const SignIn = (): JSX.Element => {
 	const [showPassword, setShowPassword] =
 		useState(false);
+
+	// Para Iniciar Sesión
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const handleLogin = async (e: React.FormEvent) => {
+		e.preventDefault(); // evita recargar la página
+
+		try {
+			const response = await fetch(
+				'http://localhost:3300/api/login',
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({ email, password }),
+				}
+			);
+
+			const data = await response.json();
+			console.log(data);
+
+			if (response.ok) {
+				alert('Inicio de sesión exitoso');
+			} else {
+				alert(data.message || 'Error al iniciar sesión');
+			}
+		} catch (err) {
+			console.error('Error en la petición:', err);
+			alert('No se pudo conectar con el servidor');
+		}
+	};
+
 	return (
 		<div className="min-h-screen flex flex-col items-center gap-[98px] bg-[#f2f2f3]">
 			<header className="flex flex-wrap min-h-20 items-center justify-center gap-[10px_10px] px-4 py-2.5 self-stretch w-full bg-[#800040]">
@@ -34,7 +67,10 @@ export const SignIn = (): JSX.Element => {
 				</div>
 			</header>
 
-			<div className="flex flex-col items-center gap-[55px] self-stretch w-full">
+			<form
+				onSubmit={handleLogin}
+				className="flex flex-col items-center gap-[55px] self-stretch w-full"
+			>
 				<Card className="border-none shadow-none bg-transparent w-full max-w-[328px] mx-auto">
 					<CardContent className="p-0">
 						<div className="flex flex-col items-center justify-center gap-8 px-4">
@@ -55,6 +91,10 @@ export const SignIn = (): JSX.Element => {
 										type="email"
 										placeholder="ejemplo@ipn.mx"
 										className="absolute w-full h-[42px] top-[27px] left-0 bg-white rounded-[14px] border border-solid border-[#d8e0ef] px-4 py-[7px] font-['Nunito_Sans',Helvetica] text-sm"
+										value={email}
+										onChange={(e) =>
+											setEmail(e.target.value)
+										}
 									/>
 								</div>
 							</div>
@@ -76,6 +116,10 @@ export const SignIn = (): JSX.Element => {
 													: 'password'
 											}
 											className="w-full h-full bg-white rounded-[14px] border border-solid border-[#d8e0ef] pr-12"
+											value={password}
+											onChange={(e) =>
+												setPassword(e.target.value)
+											}
 										/>
 										<button
 											type="button"
@@ -121,7 +165,10 @@ export const SignIn = (): JSX.Element => {
 					</CardContent>
 				</Card>
 
-				<Button className="inline-flex items-center justify-center gap-2 px-6 py-3 w-full max-w-[156px] bg-[#800040] rounded-[14px] hover:bg-[#6b0036] transition-colors">
+				<Button
+					className="inline-flex items-center justify-center gap-2 px-6 py-3 w-full max-w-[156px] bg-[#800040] rounded-[14px] hover:bg-[#6b0036] transition-colors"
+					type="submit"
+				>
 					<span className="font-['Nunito_Sans',Helvetica] font-bold text-white text-[14.8px] whitespace-nowrap">
 						Ingresar
 					</span>
@@ -140,7 +187,7 @@ export const SignIn = (): JSX.Element => {
 						Regístrate ahora
 					</Link>
 				</p>
-			</div>
+			</form>
 		</div>
 	);
 };
