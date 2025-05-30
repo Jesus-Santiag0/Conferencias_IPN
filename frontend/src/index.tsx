@@ -11,6 +11,7 @@ import { SignUp } from './screens/SignIn/SignUp';
 import { Cuestionsmain } from './screens/SignIn/Cuestionsmain';
 import { Cuestions } from './screens/SignIn/Cuestions';
 import { Cuestionsmain2 } from './screens/SignIn/Cuestionsmain2';
+import { Conferences } from './screens/SignIn/Conferences';
 
 createRoot(
 	document.getElementById('app') as HTMLElement
@@ -31,6 +32,10 @@ createRoot(
 				<Route
 					path="/cuestions"
 					element={<Cuestions />}
+				/>
+				<Route
+					path="/conferences"
+					element={<Conferences />}
 				/>
 			</Routes>
 		</BrowserRouter>

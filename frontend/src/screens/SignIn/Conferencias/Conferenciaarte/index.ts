@@ -1,0 +1,1 @@
+export { Conferenciaarte } from './Conferenciaarte';

@@ -3,3 +3,4 @@ export { SignUp } from './SignUp';
 export { Cuestionsmain } from './Cuestionsmain';
 export { Cuestions } from './Cuestions';
 export { Cuestionsmain2 } from './Cuestionsmain2';
+export { Conferences } from './Conferences';

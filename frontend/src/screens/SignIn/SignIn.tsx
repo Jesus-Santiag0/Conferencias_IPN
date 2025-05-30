@@ -41,7 +41,7 @@ export const SignIn = (): JSX.Element => {
 					'id_usuario',
 					data.id_usuario
 				);
-				navigate('/cuestionsmain2');
+				navigate('/conferences');
 				setTimeout(() => {
 					alert('Inicio de sesión exitoso');
 				}, 100);

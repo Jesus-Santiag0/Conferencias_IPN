@@ -81,22 +81,26 @@ app.post('/api/signup', (req, res) => {
 		}
 	);
 });
-// Ruta para extraer datos de ususaro
-app.get('/api/usuarios', (req, res) => {
-	const query =
-		'SELECT id, Nombre, Apellido FROM Usuarios';
 
-	db.query(query, (err, results) => {
+// Ruta para extraer datos de ususaro
+app.get('/api/usuario/:id', (req, res) => {
+	const id = req.params.id;
+	const sql =
+		'SELECT Nombre, Apellido FROM Usuarios WHERE id = ?';
+
+	db.query(sql, [id], (err, result) => {
 		if (err) {
-			console.error(
-				'Error al obtener datos del usuario:',
-				err
-			);
-			return res.status(500).json({
-				error: 'Error al consultar la base de datos',
-			});
+			console.error('Error al obtener el usuario:', err);
+			return res
+				.status(500)
+				.json({ error: 'Error del servidor' });
 		}
-		res.json(results);
+		if (result.length === 0) {
+			return res
+				.status(404)
+				.json({ error: 'Usuario no encontrado' });
+		}
+		res.json(result[0]); // devuelve { nombre: "...", apellido: "..." }
 	});
 });
 

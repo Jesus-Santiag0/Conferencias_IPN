@@ -1,0 +1,1 @@
+export { ConferenciaIYQ } from './ConferenciaIYQ';
