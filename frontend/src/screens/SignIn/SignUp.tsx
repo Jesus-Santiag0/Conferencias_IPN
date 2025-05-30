@@ -28,7 +28,9 @@ export const SignUp = (): JSX.Element => {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-
+		console.log('Datos a enviar:', {
+			formData,
+		});
 		try {
 			const response = await fetch(
 				'http://localhost:3300/api/signup',

@@ -36,6 +36,11 @@ export const SignIn = (): JSX.Element => {
 			console.log(data);
 
 			if (response.ok) {
+				// Guarda el id_usuario
+				localStorage.setItem(
+					'id_usuario',
+					data.id_usuario
+				);
 				navigate('/cuestionsmain');
 				setTimeout(() => {
 					alert('Inicio de sesión exitoso');

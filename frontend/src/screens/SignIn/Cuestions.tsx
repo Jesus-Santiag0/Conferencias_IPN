@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
 	Avatar,
 	AvatarFallback,
@@ -11,7 +11,72 @@ import {
 } from '../../components/ui/card';
 import { Textarea } from '../../components/ui/textarea';
 
+// interface Cuestions {
+// 	id_usuario: number;
+// 	cuestion: string;
+// }
+
 export const Cuestions = (): JSX.Element => {
+	const [formData, setFormData] = useState({
+		cuestion: '',
+	});
+	const handleChange = (
+		e: React.ChangeEvent<HTMLTextAreaElement>
+	) => {
+		setFormData({
+			...formData,
+			[e.target.name]: e.target.value,
+		});
+	};
+	const handleEliminar = () => {
+		setFormData({
+			cuestion: '',
+		});
+	};
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+		const id_usuario =
+			localStorage.getItem('id_usuario');
+		if (!id_usuario) {
+			alert('No se encontró el usuario');
+			return;
+		}
+		console.log('Datos a enviar:', {
+			id_usuario,
+			formData,
+		});
+		try {
+			const response = await fetch(
+				'http://localhost:3300/api/cuestions',
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						id_usuario: Number(id_usuario),
+						cuestion: formData.cuestion,
+					}),
+				}
+			);
+
+			const result = await response.json();
+			if (result.success) {
+				// Redireccionar o limpiar formulario
+				setFormData({
+					cuestion: '',
+				});
+				setTimeout(() => {
+					alert('Pregunta enviada');
+				}, 100);
+			} else {
+				alert('Error al enviar: ' + result.error);
+			}
+		} catch (error) {
+			console.error('Error en la solicitud:', error);
+			alert('Error de conexión con el servidor');
+		}
+	};
 	return (
 		<div className="flex flex-col min-h-screen items-center gap-[99px] px-4 py-0 bg-[#f2f2f3]">
 			<Card className="flex flex-col min-h-[165px] items-center gap-[22px] px-1 py-5 w-full mt-[-1.00px] border-0 shadow-none bg-white rounded-none">
@@ -62,15 +127,22 @@ export const Cuestions = (): JSX.Element => {
 				</CardContent>
 			</Card>
 
-			<div className="flex flex-col items-start w-full">
+			<form
+				onSubmit={handleSubmit}
+				className="flex flex-col items-start w-full"
+			>
 				<div className="flex flex-col items-start gap-2.5 w-full">
 					<div className="flex flex-col h-[174px] items-start gap-[7px] w-full overflow-hidden">
 						<div className="flex flex-col h-44 items-start gap-[7px] w-full">
 							<label className="w-fit [font-family:'Nunito_Sans',Helvetica] font-bold text-[#626873] text-sm tracking-[0] leading-6">
 								Pregunta
 							</label>
-
 							<Textarea
+								id="cuestion"
+								required
+								name="cuestion"
+								value={formData.cuestion}
+								onChange={handleChange}
 								className="w-full h-[120px] bg-white rounded-[14px] border border-solid border-[#d8e0ef] resize-none"
 								placeholder="Agregue alguna pregunta que tenga"
 							/>
@@ -80,13 +152,17 @@ export const Cuestions = (): JSX.Element => {
 
 				<div className="flex items-start gap-12 w-full">
 					<Button
+						onClick={handleEliminar}
 						variant="outline"
-						className="flex-1 h-12 font-bold text-[#800040] text-[14.8px] rounded-[14px] border border-solid border-[#800040]"
+						className="flex-1 h-12 font-bold bg-white text-[#800040] text-[14.8px] rounded-[14px] border border-solid  border-[#800040] hover:bg-[#401028]/5 hover:text-[#800040]"
 					>
 						Eliminar
 					</Button>
 
-					<Button className="flex-1 h-12 items-center justify-center gap-[3px] bg-[#800040] rounded-[14px] font-bold text-white text-[14.8px]">
+					<Button
+						type="submit"
+						className="flex-1 h-12 items-center justify-center gap-[3px] bg-[#800040] rounded-[14px] font-bold text-white text-[14.8px] hover:bg-[#800040]/90"
+					>
 						Enviar
 						<img
 							className="w-[17px] h-[18px] ml-1"
@@ -95,7 +171,7 @@ export const Cuestions = (): JSX.Element => {
 						/>
 					</Button>
 				</div>
-			</div>
+			</form>
 		</div>
 	);
 };

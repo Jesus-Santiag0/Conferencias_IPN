@@ -8,6 +8,13 @@ CREATE TABLE IF NOT EXISTS Usuarios(
 	Contrasena varchar(25) NOT NULL,
 	PRIMARY KEY(id)
 );
+CREATE TABLE IF NOT EXISTS Preguntas(
+	id_pregunta int UNSIGNED NOT NULL AUTO_INCREMENT,
+	Pregunta varchar(250) NOT NULL,
+	id_usuario int UNSIGNED NOT NULL,
+	PRIMARY KEY(id_pregunta),
+	FOREIGN KEY(id_usuario) REFERENCES Usuarios(id)
+);
 
 INSERT INTO Usuarios(Nombre,Apellido,Correo,Contrasena)
 VALUES

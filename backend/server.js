@@ -38,8 +38,10 @@ app.post('/api/login', (req, res) => {
 		}
 
 		if (results.length > 0) {
+			// Usuario encontrado, devolvemos el id_usuario
 			res.json({
 				success: true,
+				id_usuario: results[0].id,
 				message: 'Login exitoso',
 			});
 		} else {
@@ -75,6 +77,57 @@ app.post('/api/signup', (req, res) => {
 			res.status(201).json({
 				success: true,
 				message: 'Usuario registrado correctamente',
+			});
+		}
+	);
+});
+// Ruta para extraer datos de ususaro
+app.get('/api/usuarios', (req, res) => {
+	const query =
+		'SELECT id, Nombre, Apellido FROM Usuarios';
+
+	db.query(query, (err, results) => {
+		if (err) {
+			console.error(
+				'Error al obtener datos del usuario:',
+				err
+			);
+			return res.status(500).json({
+				error: 'Error al consultar la base de datos',
+			});
+		}
+		res.json(results);
+	});
+});
+
+// Ruta para almacenar datos en la API de cuestions.tsx
+app.post('/api/cuestions', (req, res) => {
+	const { id_usuario, cuestion } = req.body;
+	console.log('BODY:', req.body);
+	console.log('Recibido en el backend:', {
+		id_usuario,
+		cuestion,
+	});
+
+	const sql =
+		'INSERT INTO Preguntas (Pregunta,id_usuario) VALUES (?, ?)';
+	db.query(
+		sql,
+		[cuestion, id_usuario],
+		(err, result) => {
+			if (err) {
+				console.error(
+					'❌ Error al insertar pregunta:',
+					err
+				);
+				return res.status(500).json({
+					success: false,
+					error: 'Error en el servidor',
+				});
+			}
+			res.status(201).json({
+				success: true,
+				message: 'Pregunta registrada correctamente',
 			});
 		}
 	);
