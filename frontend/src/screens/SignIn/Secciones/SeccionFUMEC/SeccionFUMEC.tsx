@@ -2,6 +2,7 @@ import {
 	CalendarIcon,
 	ClockIcon,
 	MapPinIcon,
+	EditIcon,
 } from 'lucide-react';
 import React from 'react';
 import {
@@ -10,23 +11,24 @@ import {
 } from '../../../../components/ui/card';
 import { Link } from 'react-router-dom';
 
-export const ConferenciaIYQ = (): JSX.Element => {
-	const conferenceData = {
-		organization: 'Academia de física de IE ESIMEZ IPN',
-		title: 'IYQ 2025',
-		subtitle:
-			'100 años de la Mecánica Cuántica: Pasado, Presente y Futuro',
-		location: 'Auditorio 5 ESIMEZ',
-		date: 'May 2, 2025',
-		time: '14:00 - 18:00 hrs',
-		image: '/esimelogo.png',
-	};
+// Conference data for easy maintenance and reusability
+const conferenceData = {
+	organization: 'LNunT',
+	title: 'FUMEC',
+	subtitle:
+		'Eugenio Marín Chief Executive Officer at FUMEC | Fundación México Estados unidos para la Ciencia',
+	location: 'Auditorio Ing. Alejo Peralta',
+	date: 'Nov 28, 2024',
+	time: '9:15 - 9:50 hrs',
+	image: '/fumec.png',
+};
 
+export const SeccionFUMEC = (): JSX.Element => {
 	return (
 		<Card className="rounded-3xl border-none bg-[#FFFFFF]">
 			<CardContent className="p-3">
 				<div className="flex flex-col gap-5 w-full">
-					{/* Header with image and title */}
+					{/* Header with logo and conference info */}
 					<div className="flex items-center gap-2.5">
 						<div className="w-12 h-12 flex-shrink-0">
 							<div className="relative w-full h-full">
@@ -91,13 +93,12 @@ export const ConferenciaIYQ = (): JSX.Element => {
 							src="/social-icons.svg"
 						/>
 					</div>
-
 					<Link
 						to=""
-						// agregar a class underline para estar activo
-						className="text-xs text-[#800040] font-normal mr-10"
+						className="h-6 px-2 py-1 bg-[#800040] rounded-[14px] text-xs font-medium text-white flex items-center gap-1 mr-5 hover:bg-[#800040]/90"
 					>
-						Ver detalles
+						Preguntar
+						<EditIcon className="w-3.5 h-3.5" />
 					</Link>
 				</div>
 			</CardContent>

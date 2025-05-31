@@ -10,23 +10,23 @@ import {
 } from '../../../../components/ui/card';
 import { Link } from 'react-router-dom';
 
-export const ConferenciaIYQ = (): JSX.Element => {
-	const conferenceData = {
-		organization: 'Academia de física de IE ESIMEZ IPN',
-		title: 'IYQ 2025',
-		subtitle:
-			'100 años de la Mecánica Cuántica: Pasado, Presente y Futuro',
-		location: 'Auditorio 5 ESIMEZ',
-		date: 'May 2, 2025',
-		time: '14:00 - 18:00 hrs',
-		image: '/esimelogo.png',
-	};
+// Conference data for easy maintenance and reusability
+const conferenceData = {
+	organization: 'LNunT',
+	title: 'Registro',
+	subtitle: '',
+	location: 'Auditorio Ing. Alejo Peralta',
+	date: 'Nov 28, 2024',
+	time: '08:30 - 9:00 hrs',
+	image: '/cnmnipnlogo.png',
+};
 
+export const SeccionRegistro = (): JSX.Element => {
 	return (
 		<Card className="rounded-3xl border-none bg-[#FFFFFF]">
 			<CardContent className="p-3">
 				<div className="flex flex-col gap-5 w-full">
-					{/* Header with image and title */}
+					{/* Header with logo and conference info */}
 					<div className="flex items-center gap-2.5">
 						<div className="w-12 h-12 flex-shrink-0">
 							<div className="relative w-full h-full">
@@ -85,20 +85,12 @@ export const ConferenciaIYQ = (): JSX.Element => {
 						<span className="text-xs text-[#91929e] font-normal whitespace-nowrap">
 							Transmisión en:
 						</span>
-						<img
+						{/* <img
 							className="w-3.5 h-3.5"
 							alt="Social media"
 							src="/social-icons.svg"
-						/>
+						/> */}
 					</div>
-
-					<Link
-						to=""
-						// agregar a class underline para estar activo
-						className="text-xs text-[#800040] font-normal mr-10"
-					>
-						Ver detalles
-					</Link>
 				</div>
 			</CardContent>
 		</Card>

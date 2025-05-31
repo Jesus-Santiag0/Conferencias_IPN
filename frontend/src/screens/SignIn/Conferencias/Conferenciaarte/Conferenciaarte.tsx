@@ -90,13 +90,6 @@ export const Conferenciaarte = (): JSX.Element => {
 							src="/social-icons.svg"
 						/>
 					</div>
-
-					<Link
-						to="/cuestionsmain"
-						className="text-xs text-[#800040] underline font-normal mr-10"
-					>
-						Ver detalles
-					</Link>
 				</div>
 			</CardContent>
 		</Card>

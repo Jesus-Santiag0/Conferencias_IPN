@@ -1,0 +1,1 @@
+export { SeccionInaguracion } from './SeccionInaguracion';

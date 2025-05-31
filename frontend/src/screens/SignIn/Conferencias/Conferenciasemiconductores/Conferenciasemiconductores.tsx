@@ -94,7 +94,7 @@ export const Conferenciasemiconductores =
 							/>
 						</div>
 						<Link
-							to="/cuestionsmain"
+							to="/details"
 							className="text-xs text-[#800040] underline font-normal mr-10"
 						>
 							Ver detalles

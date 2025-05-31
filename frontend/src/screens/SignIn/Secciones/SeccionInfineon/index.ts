@@ -1,0 +1,1 @@
+export { SeccionInfineon } from './SeccionInfineon';

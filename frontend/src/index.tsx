@@ -12,6 +12,7 @@ import { Cuestionsmain } from './screens/SignIn/Cuestionsmain';
 import { Cuestions } from './screens/SignIn/Cuestions';
 import { Cuestionsmain2 } from './screens/SignIn/Cuestionsmain2';
 import { Conferences } from './screens/SignIn/Conferences';
+import { Details } from './screens/SignIn/Details';
 
 createRoot(
 	document.getElementById('app') as HTMLElement
@@ -37,6 +38,7 @@ createRoot(
 					path="/conferences"
 					element={<Conferences />}
 				/>
+				<Route path="/details" element={<Details />} />
 			</Routes>
 		</BrowserRouter>
 	</StrictMode>
