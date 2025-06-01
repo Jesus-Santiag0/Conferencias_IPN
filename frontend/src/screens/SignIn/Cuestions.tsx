@@ -10,6 +10,7 @@ import {
 	CardContent,
 } from '../../components/ui/card';
 import { Textarea } from '../../components/ui/textarea';
+import { useNavigate } from 'react-router-dom';
 
 // interface Cuestions {
 // 	id_usuario: number;
@@ -20,6 +21,7 @@ export const Cuestions = (): JSX.Element => {
 	const [formData, setFormData] = useState({
 		cuestion: '',
 	});
+	const navigate = useNavigate();
 	const handleChange = (
 		e: React.ChangeEvent<HTMLTextAreaElement>
 	) => {
@@ -69,6 +71,7 @@ export const Cuestions = (): JSX.Element => {
 				setFormData({
 					cuestion: '',
 				});
+				navigate('/cuestionsmain2');
 				setTimeout(() => {
 					alert('Pregunta enviada');
 				}, 100);

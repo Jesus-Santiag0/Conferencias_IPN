@@ -54,7 +54,7 @@ export const SeccionInfineon = (): JSX.Element => {
 		if (existePregunta) {
 			navigate('/cuestionsmain2');
 		} else {
-			navigate('/cuestionmain');
+			navigate('/cuestionsmain');
 		}
 	};
 	return (

@@ -42,9 +42,9 @@ export const SignIn = (): JSX.Element => {
 					data.id_usuario
 				);
 				navigate('/conferences');
-				setTimeout(() => {
-					alert('Inicio de sesión exitoso');
-				}, 100);
+				// setTimeout(() => {
+				// 	alert('Inicio de sesión exitoso');
+				// }, 100);
 			} else {
 				alert(data.message || 'Error al iniciar sesión');
 			}

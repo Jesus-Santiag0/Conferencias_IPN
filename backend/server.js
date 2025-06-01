@@ -160,29 +160,34 @@ app.get('/api/cuestions/:evento', (req, res) => {
 
 // API para mostrar las preguntas
 app.get(
-	'/api/cuestions-con-usuarios:evento',
+	'/api/cuestions-con-usuarios/:evento',
 	(req, res) => {
 		const evento = req.params.evento;
+		console.log('Evento recibido:', evento);
 		const query = `
-    SELECT
+    SELECT DISTINCT
       Preguntas.Pregunta,
       Preguntas.id_usuario,
       Usuarios.Nombre,
       Usuarios.Apellido
-    FROM Preguntas WHERE Evento=?
+    FROM
+      Preguntas
     JOIN Usuarios ON Preguntas.id_usuario = Usuarios.id
+    WHERE
+    	Preguntas.Evento=?
   `;
-
 		db.query(query, [evento], (err, results) => {
 			if (err) {
-				console.error(
-					'Error al obtener cuestiones con usuarios:',
-					err
-				);
+				// console.error(
+				// 	'Error al obtener cuestiones con usuarios:',
+				// 	err
+				// );
+				console.error('Error SQL:', err);
 				return res
 					.status(500)
 					.json({ error: 'Error en el servidor' });
 			}
+			console.log('Resultados:', results);
 
 			res.json(results); // Devuelve un arreglo de objetos
 		});

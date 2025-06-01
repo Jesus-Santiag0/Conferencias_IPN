@@ -11,36 +11,53 @@ import {
 	CardContent,
 } from '../../components/ui/card';
 import { Link } from 'react-router-dom';
+import { useEffect, useState, useRef } from 'react';
 
-// Data for questions to enable mapping
-const questions = [
-	{
-		id: 1,
-		author: 'Jeremy Dylan Hernandez',
-		role: 'Estudiante del IPN',
-		avatar: '/person.png',
-		question:
-			'¿Cuáles son las principales áreas de innovación en las que Infineon está invirtiendo actualmente?',
-	},
-	{
-		id: 2,
-		author: 'Sebastián Limas Ortega',
-		role: 'Estudiante del IPN',
-		avatar: '/person.png',
-		question:
-			'¿Cómo define Infineon su impacto en industrias clave como la automotriz, energías renovables y tecnologías de comunicación?',
-	},
-	{
-		id: 3,
-		author: 'Sebastián Limas Ortega',
-		role: 'Estudiante del IPN',
-		avatar: '/person.png',
-		question:
-			'¿Qué valores o cultura interna distinguen a Infineon como empleador dentro de la industria tecnológica?',
-	},
-];
-
+type CuestionConUsuario = {
+	Pregunta: string;
+	id_usuario: number;
+	Nombre: string;
+	Apellido: string;
+	// Rol:string;
+	// avatar: '/person.png';
+};
 export const Cuestionsmain2 = (): JSX.Element => {
+	const [cuestions, setCuestions] = useState<
+		CuestionConUsuario[]
+	>([]);
+	// const didFetch = useRef(false);
+	useEffect(() => {
+		// if (didFetch.current) return;
+		// didFetch.current = true;
+
+		const evento = 1;
+		const obtenerCuestions = async () => {
+			try {
+				const response = await fetch(
+					`http://localhost:3300/api/cuestions-con-usuarios/${evento}`
+				);
+				const data = await response.json();
+				console.log('Cuestions recibidas:', data);
+				setCuestions(data);
+			} catch (error) {
+				console.error(
+					'Error al obtener las cuestiones:',
+					error
+				);
+			}
+		};
+
+		// Primera carga
+		obtenerCuestions();
+
+		// Consulta cada 5 segundos
+		const interval = setInterval(() => {
+			obtenerCuestions();
+		}, 2000);
+
+		// Limpia el intervalo al desmonar el componente
+		return () => clearInterval(interval);
+	}, []);
 	return (
 		<div className="flex flex-col min-h-screen items-center gap-[25px] px-4 py-0 relative bg-[#f2f2f3]">
 			{/* Conference header section */}
@@ -99,33 +116,33 @@ export const Cuestionsmain2 = (): JSX.Element => {
 
 			{/* Questions section */}
 			<div className="flex flex-col w-[328px] items-end gap-[15px] relative flex-1 grow">
-				{questions.map((item) => (
+				{cuestions.map((item, index) => (
 					<Card
-						key={item.id}
+						key={index}
 						className="flex flex-col items-start justify-center w-full bg-white rounded-xl"
 					>
 						<CardContent className="flex flex-col gap-3 p-5 w-full">
 							<div className="flex items-center gap-3 h-10 w-full">
 								<Avatar className="w-10 h-10">
 									<AvatarImage
-										src={item.avatar}
-										alt={`${item.author} avatar`}
+										src={'./person.png'}
+										alt={`${item.Nombre} avatar`}
 									/>
 									<AvatarFallback>
-										{item.author.charAt(0)}
+										{item.Nombre.charAt(0)}
 									</AvatarFallback>
 								</Avatar>
 								<div className="flex flex-col">
 									<p className="h-4 [font-family:'Roboto',Helvetica] font-medium text-[#202020] text-sm tracking-[0.10px] leading-[normal]">
-										{item.author}
+										{item.Nombre} {item.Apellido}
 									</p>
 									<p className="h-3.5 font-primary-body-small text-[#7e7e7e] text-[length:var(--primary-body-small-font-size)]">
-										{item.role}
+										{/* {item.role} */}
 									</p>
 								</div>
 							</div>
 							<p className="font-primary-body-small text-[#5f5f5f] text-[length:var(--primary-body-small-font-size)] text-justify">
-								{item.question}
+								{item.Pregunta}
 							</p>
 						</CardContent>
 					</Card>
