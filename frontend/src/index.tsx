@@ -9,8 +9,11 @@ import {
 import { SignIn } from './screens/SignIn';
 import { SignUp } from './screens/SignIn/SignUp';
 import { Cuestionsmain } from './screens/SignIn/Cuestionsmain';
+import { Cuestionsmainfumec } from './screens/SignIn/Cuestionsmainfumec';
 import { Cuestions } from './screens/SignIn/Cuestions';
+import { Cuestions2 } from './screens/SignIn/Cuestions2';
 import { Cuestionsmain2 } from './screens/SignIn/Cuestionsmain2';
+import { Cuestionsmain2fumec } from './screens/SignIn/cuestionsmain2fumec';
 import { Conferences } from './screens/SignIn/Conferences';
 import { Details } from './screens/SignIn/Details';
 
@@ -27,12 +30,24 @@ createRoot(
 					element={<Cuestionsmain />}
 				/>
 				<Route
+					path="/cuestionmainfumec"
+					element={<Cuestionsmainfumec />}
+				/>
+				<Route
 					path="/cuestionsmain2"
 					element={<Cuestionsmain2 />}
 				/>
 				<Route
+					path="/cuestionsmain2fumec"
+					element={<Cuestionsmain2fumec />}
+				/>
+				<Route
 					path="/cuestions"
 					element={<Cuestions />}
+				/>
+				<Route
+					path="/cuestions2"
+					element={<Cuestions2 />}
 				/>
 				<Route
 					path="/conferences"

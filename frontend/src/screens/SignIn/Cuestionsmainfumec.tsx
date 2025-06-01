@@ -12,7 +12,7 @@ import {
 } from '../../components/ui/avatar';
 import { Link } from 'react-router-dom';
 
-export const Cuestionsmain = (): JSX.Element => {
+export const Cuestionsmainfumec = (): JSX.Element => {
 	return (
 		<main className="flex flex-col min-h-screen items-center gap-[25px] px-4 py-0 relative bg-[#f2f2f3]">
 			<Card className="flex flex-col min-h-[165px] items-center gap-[22px] px-1 py-5 w-full mt-[-1.00px] border-0 shadow-none bg-white rounded-none">
@@ -26,8 +26,8 @@ export const Cuestionsmain = (): JSX.Element => {
 							<div className="flex-shrink-0">
 								<Avatar className="w-12 h-12 rounded-[10px] border border-solid border-[#80004073]">
 									<AvatarImage
-										src="/infineon.png"
-										alt="Infineon logo"
+										src="/fumec.png"
+										alt="FUMEC logo"
 									/>
 									<AvatarFallback className="bg-white rounded-[10px] border border-solid border-[#80004073]"></AvatarFallback>
 								</Avatar>
@@ -42,19 +42,18 @@ export const Cuestionsmain = (): JSX.Element => {
 
 								<div className="flex flex-col gap-2.5 w-full">
 									<p className="[font-family:'Nunito_Sans',Helvetica] font-bold text-[#800040] text-sm tracking-[0] leading-[10px]">
-										Infineon Technologies
+										FUMEC
 									</p>
 								</div>
 
 								<div className="flex flex-col gap-2.5 w-full">
 									<p className="[font-family:'Nunito_Sans',Helvetica] font-normal text-[#91929e] text-xs tracking-[0] leading-[10px]">
-										Ariel Abam
+										Eugenio Marín
 										<br />
-										Managing Director and Vice President
-										of
+										Chief Executive Officer at FUMEC |
 										<br />
-										Operations | Infineon Technologies in
-										México
+										Fundación México Estados unidos para
+										la Ciencia
 									</p>
 								</div>
 							</div>
@@ -69,7 +68,7 @@ export const Cuestionsmain = (): JSX.Element => {
 						¿Quieres hacer una pregunta?
 					</h2>
 				</div>
-				<Link to="/cuestions">
+				<Link to="/cuestions2">
 					<Button
 						className="w-[52px] h-[52px] p-2.5 bg-[#800040] rounded-[50px] hover:bg-[#800040]/90 ml-[-22px]"
 						size="icon"

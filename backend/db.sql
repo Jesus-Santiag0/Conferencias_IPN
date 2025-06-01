@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS Usuarios(
 );
 CREATE TABLE IF NOT EXISTS Preguntas(
 	id_pregunta int UNSIGNED NOT NULL AUTO_INCREMENT,
+	Evento tinyint UNSIGNED NOT NULL,
 	Pregunta varchar(250) NOT NULL,
 	id_usuario int UNSIGNED NOT NULL,
 	PRIMARY KEY(id_pregunta),

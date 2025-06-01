@@ -9,7 +9,9 @@ import {
 	Card,
 	CardContent,
 } from '../../../../components/ui/card';
-import { Link } from 'react-router-dom';
+import { Button } from '../../../../components/ui/button';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // Conference data for easy maintenance and reusability
 const conferenceData = {
@@ -24,6 +26,37 @@ const conferenceData = {
 };
 
 export const SeccionInfineon = (): JSX.Element => {
+	const [existePregunta, setExistePregunta] =
+		useState(false);
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		const evento = 1;
+		const verificarPreguntas = async () => {
+			try {
+				const res = await fetch(
+					`http://localhost:3300/api/cuestions/${evento}`
+				);
+				const data = await res.json();
+				setExistePregunta(data.existe);
+			} catch (error) {
+				console.error(
+					'Error al consultar preguntas:',
+					error
+				);
+			}
+		};
+
+		verificarPreguntas();
+	});
+
+	const handleClick = () => {
+		if (existePregunta) {
+			navigate('/cuestionsmain2');
+		} else {
+			navigate('/cuestionmain');
+		}
+	};
 	return (
 		<Card className="rounded-3xl border-none bg-[#FFFFFF]">
 			<CardContent className="p-3">
@@ -93,13 +126,13 @@ export const SeccionInfineon = (): JSX.Element => {
 							src="/social-icons.svg"
 						/>
 					</div>
-					<Link
-						to="/cuestionsmain"
+					<Button
+						onClick={handleClick}
 						className="h-6 px-2 py-1 bg-[#800040] rounded-[14px] text-xs font-medium text-white flex items-center gap-1 mr-5 hover:bg-[#800040]/90"
 					>
 						Preguntar
 						<EditIcon className="w-3.5 h-3.5" />
-					</Link>
+					</Button>
 				</div>
 			</CardContent>
 		</Card>

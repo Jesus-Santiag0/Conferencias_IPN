@@ -106,18 +106,19 @@ app.get('/api/usuario/:id', (req, res) => {
 
 // Ruta para almacenar datos en la API de cuestions.tsx
 app.post('/api/cuestions', (req, res) => {
-	const { id_usuario, cuestion } = req.body;
+	const { evento, id_usuario, cuestion } = req.body;
 	console.log('BODY:', req.body);
 	console.log('Recibido en el backend:', {
 		id_usuario,
 		cuestion,
+		evento,
 	});
 
 	const sql =
-		'INSERT INTO Preguntas (Pregunta,id_usuario) VALUES (?, ?)';
+		'INSERT INTO Preguntas (Evento,Pregunta,id_usuario) VALUES (?,?, ?)';
 	db.query(
 		sql,
-		[cuestion, id_usuario],
+		[evento, cuestion, id_usuario],
 		(err, result) => {
 			if (err) {
 				console.error(
@@ -136,6 +137,57 @@ app.post('/api/cuestions', (req, res) => {
 		}
 	);
 });
+
+// Lectura de la tabla Preguntas
+app.get('/api/cuestions/:evento', (req, res) => {
+	const evento = req.params.evento;
+	const query = 'SELECT * FROM Preguntas WHERE Evento=?';
+	db.query(query, [evento], (err, results) => {
+		if (err) {
+			console.error('Error al obtener registros:', err);
+			return res
+				.status(500)
+				.json({ error: 'Error en la base de datos' });
+		}
+		// Comprueba si ya hay preguntas
+		if (results.length > 0) {
+			res.json({ existe: true, data: results });
+		} else {
+			res.json({ existe: false });
+		}
+	});
+});
+
+// API para mostrar las preguntas
+app.get(
+	'/api/cuestions-con-usuarios:evento',
+	(req, res) => {
+		const evento = req.params.evento;
+		const query = `
+    SELECT
+      Preguntas.Pregunta,
+      Preguntas.id_usuario,
+      Usuarios.Nombre,
+      Usuarios.Apellido
+    FROM Preguntas WHERE Evento=?
+    JOIN Usuarios ON Preguntas.id_usuario = Usuarios.id
+  `;
+
+		db.query(query, [evento], (err, results) => {
+			if (err) {
+				console.error(
+					'Error al obtener cuestiones con usuarios:',
+					err
+				);
+				return res
+					.status(500)
+					.json({ error: 'Error en el servidor' });
+			}
+
+			res.json(results); // Devuelve un arreglo de objetos
+		});
+	}
+);
 
 // Comprueba si el servidor está corriendo
 app.listen(PORT, () => {

@@ -16,7 +16,7 @@ import { Textarea } from '../../components/ui/textarea';
 // 	cuestion: string;
 // }
 
-export const Cuestions = (): JSX.Element => {
+export const Cuestions2 = (): JSX.Element => {
 	const [formData, setFormData] = useState({
 		cuestion: '',
 	});
@@ -37,7 +37,7 @@ export const Cuestions = (): JSX.Element => {
 		e.preventDefault();
 		const id_usuario =
 			localStorage.getItem('id_usuario');
-		const evento = 1;
+		const evento = 2;
 		if (!id_usuario) {
 			alert('No se encontró el usuario');
 			return;
@@ -93,8 +93,8 @@ export const Cuestions = (): JSX.Element => {
 							<div className="flex-shrink-0">
 								<Avatar className="w-12 h-12 rounded-[10px] border border-solid border-[#80004073]">
 									<AvatarImage
-										src="/infineon.png"
-										alt="Infineon logo"
+										src="/fumec.png"
+										alt="FUMEC logo"
 									/>
 									<AvatarFallback className="bg-white rounded-[10px] border border-solid border-[#80004073]"></AvatarFallback>
 								</Avatar>
@@ -109,19 +109,18 @@ export const Cuestions = (): JSX.Element => {
 
 								<div className="flex flex-col gap-2.5 w-full">
 									<p className="[font-family:'Nunito_Sans',Helvetica] font-bold text-[#800040] text-sm tracking-[0] leading-[10px]">
-										Infineon Technologies
+										FUMEC
 									</p>
 								</div>
 
 								<div className="flex flex-col gap-2.5 w-full">
 									<p className="[font-family:'Nunito_Sans',Helvetica] font-normal text-[#91929e] text-xs tracking-[0] leading-[10px]">
-										Ariel Abam
+										Eugenio Marín
 										<br />
-										Managing Director and Vice President
-										of
+										Chief Executive Officer at FUMEC |
 										<br />
-										Operations | Infineon Technologies in
-										México
+										Fundación México Estados unidos para
+										la Ciencia
 									</p>
 								</div>
 							</div>
