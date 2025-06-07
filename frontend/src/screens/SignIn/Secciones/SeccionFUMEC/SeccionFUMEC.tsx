@@ -35,7 +35,7 @@ export const SeccionFUMEC = (): JSX.Element => {
 		const verificarPreguntas = async () => {
 			try {
 				const res = await fetch(
-					`http://localhost:3300/api/cuestions/${evento}`
+					`http://13.58.112.12:3300/api/cuestions/${evento}`
 				);
 				const data = await res.json();
 				setExistePregunta(data.existe);
