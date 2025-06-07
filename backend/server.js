@@ -16,9 +16,11 @@ app.use(express.json());
 
 // Configura tu conexión a MySQL
 const db = mysql.createConnection({
-	host: 'localhost',
+	// host: 'localhost',
+	// Para servidor en AWS
+	host: 'db-conferenciasipn.c1ueqmsaovx0.us-east-2.rds.amazonaws.com',
 	user: 'root',
-	password: '',
+	password: '$Santi-2210',
 	database: 'Conferencias_IPN',
 });
 
