@@ -12,7 +12,7 @@ export const HeaderSection = (): JSX.Element => {
 		if (!id_usuario) return;
 
 		fetch(
-			`http://localhost:3300/api/usuario/${id_usuario}`
+			`http://13.58.112.12:3300/api/usuario/${id_usuario}`
 		)
 			.then((res) => res.json())
 			.then((data) => {
