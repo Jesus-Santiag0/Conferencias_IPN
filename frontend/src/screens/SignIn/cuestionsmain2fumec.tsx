@@ -34,7 +34,7 @@ export const Cuestionsmain2fumec = (): JSX.Element => {
 		const obtenerCuestions = async () => {
 			try {
 				const response = await fetch(
-					`http://localhost:3300/api/cuestions-con-usuarios/${evento}`
+					`http://13.58.112.12:3300/api/cuestions-con-usuarios/${evento}`
 				);
 				const data = await response.json();
 				console.log('Cuestions recibidas:', data);

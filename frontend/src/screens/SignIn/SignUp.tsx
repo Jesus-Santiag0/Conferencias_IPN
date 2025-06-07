@@ -33,7 +33,7 @@ export const SignUp = (): JSX.Element => {
 		});
 		try {
 			const response = await fetch(
-				'http://localhost:3300/api/signup',
+				'http://13.58.112.12:3300/api/signup',
 				{
 					method: 'POST',
 					headers: {

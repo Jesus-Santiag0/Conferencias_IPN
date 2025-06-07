@@ -46,7 +46,7 @@ export const Cuestions2 = (): JSX.Element => {
 		});
 		try {
 			const response = await fetch(
-				'http://localhost:3300/api/cuestions',
+				'http://13.58.112.12:3300/api/cuestions',
 				{
 					method: 'POST',
 					headers: {

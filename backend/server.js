@@ -7,7 +7,7 @@ const PORT = 3300;
 
 app.use(
 	cors({
-		origin: 'http://localhost:5173', // dirección de tu frontend (vite por defecto)
+		origin: 'http://13.58.112.12:5173', // dirección de tu frontend (vite por defecto)
 		credentials: true,
 	})
 );
@@ -197,8 +197,13 @@ app.get(
 );
 
 // Comprueba si el servidor está corriendo
-app.listen(PORT, () => {
+// app.listen(PORT, () => {
+// 	console.log(
+// 		`Servidor corriendo en http://localhost:${PORT}`
+// 	);
+// });
+app.listen(PORT, '0.0.0.0', () => {
 	console.log(
-		`Servidor corriendo en http://localhost:${PORT}`
+		`Servidor corriendo en http://0.0.0.0:${PORT}`
 	);
 });

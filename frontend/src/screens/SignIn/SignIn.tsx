@@ -23,7 +23,7 @@ export const SignIn = (): JSX.Element => {
 		e.preventDefault(); // evita recargar la página
 		try {
 			const response = await fetch(
-				'http://localhost:3300/api/login',
+				'http://13.58.112.12:3300/api/login',
 				{
 					method: 'POST',
 					headers: {
